@@ -19,4 +19,23 @@ describe('Testes do fluxo de times (Teams)', function () {
     expect(status).to.equal(200);
     expect(body).to.deep.equal(teamMock.teams);
   })
+
+  it('Deve retornar um time específico', async function () {
+    sinon.stub(SequelizeTeams, 'findOne').resolves(teamMock.team as any);
+
+    const { status, body } = await chai.request(app).get('/teams/1');
+
+    expect(status).to.equal(200);
+    expect(body).to.deep.equal(teamMock.team);
+  })
+
+  it('caso seja informado um id inválido, retorna um erro', async function () {
+    sinon.stub(SequelizeTeams, 'findOne').resolves(null);
+    const { status, body } = await chai.request(app).get('/teams/99999');
+
+    expect(status).to.equal(404);
+    expect(body.message).to.deep.equal('Team not found!');
+  })
+
+  afterEach(sinon.restore);
 });
