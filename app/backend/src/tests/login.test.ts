@@ -32,7 +32,7 @@ describe('Testes do fluxo de Users e Login', function () {
   })
 
   it('Se o login não tiver o campo "password", deve retornar um erro com status 400', async function () {
-    const parameters = loginMock.bodyWithInvalidPassword;
+    const parameters = loginMock.bodyWithoutPassword;
 
     const { body, status } = await chai.request(app).post('/login').send(parameters);
 
