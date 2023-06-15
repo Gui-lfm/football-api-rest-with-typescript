@@ -30,7 +30,7 @@ class Validations {
       if (!authorization) {
         return res.status(401).json({ message: 'Token not found' });
       }
-      this.tokenGenerator.verify(authorization);
+      Validations.tokenGenerator.verify(authorization);
       next();
     } catch (error) {
       console.log(error);

@@ -12,4 +12,10 @@ router.post(
   (req: Request, res: Response) => loginController.login(req, res),
 );
 
+router.get(
+  '/role',
+  Validations.validateToken,
+  (req: Request, res: Response) => loginController.getRole(req, res),
+);
+
 export default router;

@@ -4,4 +4,5 @@ import { IUser } from './users/IUser';
 export interface TokenGenerator {
   generate(user: IUser): string
   verify(token: string): string | jwt.JwtPayload
+  decode(token: string): IUser
 }
