@@ -7,6 +7,13 @@ export default class TokenJWTService implements TokenGenerator {
 
   generate(user: IUser): string {
     const token = this.jwt.sign({ id: user.id }, process.env.JWT_SECRET || 'jwt_secret');
+
     return token;
+  }
+
+  verify(token: string): string | jwt.JwtPayload {
+    const decoded = this.jwt.verify(token, process.env.JWT_SECRET || 'jwt_secret');
+
+    return decoded;
   }
 }
