@@ -13,4 +13,10 @@ export default class MatchService {
 
     return { status: 'SUCCESSFUL', data: response };
   }
+
+  public async getMatchesByStatus(status: boolean): Promise<ServiceResponse<IMatch[]>> {
+    const response = await this.matchModel.findByMatchStatus(status);
+
+    return { status: 'SUCCESSFUL', data: response };
+  }
 }

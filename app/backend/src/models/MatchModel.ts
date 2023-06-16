@@ -23,4 +23,23 @@ export default class MatchModel implements IMatchModel {
     });
     return response;
   }
+
+  async findByMatchStatus(status: boolean): Promise<IMatch[]> {
+    const response = await this.model.findAll({
+      where: { inProgress: status },
+      include: [
+        {
+          model: SequelizeTeams,
+          as: 'homeTeam',
+          attributes: ['teamName'],
+        },
+        {
+          model: SequelizeTeams,
+          as: 'awayTeam',
+          attributes: ['teamName'],
+        },
+      ],
+    });
+    return response;
+  }
 }
