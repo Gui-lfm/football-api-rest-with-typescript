@@ -28,4 +28,18 @@ export default class MatchService {
 
     return { status: 'SUCCESSFUL', data: response };
   }
+
+  public async updateMatch(
+    homeTeamGoals:number,
+    awayTeamGoals:number,
+    id:number,
+  ): Promise<ServiceResponse<IMatch | null>> {
+    const response = await this.matchModel.updateMatchScore(homeTeamGoals, awayTeamGoals, id);
+
+    if (!response) {
+      return { status: 'NOT_FOUND', data: { message: 'Match not found!' } };
+    }
+
+    return { status: 'SUCCESSFUL', data: response };
+  }
 }

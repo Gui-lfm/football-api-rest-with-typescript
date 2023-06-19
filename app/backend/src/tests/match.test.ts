@@ -37,6 +37,13 @@ describe('Testes do fluxo de partidas (matches)', function () {
     expect(status).to.equal(200);
     expect(body).to.deep.equal(matchMock.matches);
   })
+  it('É possível finalizar uma partida em andamento', async function () {
+    
+  })
+
+  it('É possível atualizar o placar de uma partida em andamento', async function () {
+    
+  })
 
   afterEach(sinon.restore);
 })
