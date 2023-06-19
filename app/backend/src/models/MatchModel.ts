@@ -42,4 +42,13 @@ export default class MatchModel implements IMatchModel {
     });
     return response;
   }
+
+  async endMatch(id: number): Promise<boolean> {
+    const response = await this.model.update({ inProgress: false }, { where: { id } });
+
+    if (!response) {
+      return false;
+    }
+    return true;
+  }
 }

@@ -19,4 +19,13 @@ export default class MatchService {
 
     return { status: 'SUCCESSFUL', data: response };
   }
+
+  public async endMatch(id: number): Promise<ServiceResponse<boolean>> {
+    const response = await this.matchModel.endMatch(id);
+    if (!response) {
+      return { status: 'NOT_FOUND', data: { message: 'Match not found!' } };
+    }
+
+    return { status: 'SUCCESSFUL', data: response };
+  }
 }
