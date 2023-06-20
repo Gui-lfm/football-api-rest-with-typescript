@@ -41,6 +41,7 @@ SequelizeMatches.init(
     },
     inProgress: {
       type: DataTypes.BOOLEAN,
+      defaultValue: true,
     },
   },
   {
