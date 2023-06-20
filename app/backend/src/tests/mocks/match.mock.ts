@@ -15,7 +15,7 @@ const match = {
 
 const matches = [match];
 
-const activeMatches = [{
+const activeMatch = {
   id: 41,
   homeTeamId: 16,
   homeTeamGoals: 2,
@@ -28,11 +28,46 @@ const activeMatches = [{
   awayTeam: {
     teamName: "Internacional"
   }
-}]
+}
+
+const activeMatches = [activeMatch]
+
+const newScore = {
+  homeTeamGoals: 3,
+  awayTeamGoals: 4,
+}
+
+const matchRequest = {
+  homeTeamId: 16, 
+  awayTeamId: 8, 
+  homeTeamGoals: 2,
+  awayTeamGoals: 2,
+}
+
+const newMatch = {
+  id: 1,
+  homeTeamId: 16, 
+  awayTeamId: 8, 
+  homeTeamGoals: 2,
+  awayTeamGoals: 2,
+  inProgress: true,
+}
+
+const sameTeam = {
+  homeTeamId: 8, 
+  awayTeamId: 8, 
+  homeTeamGoals: 2,
+  awayTeamGoals: 2,
+}
 
 
 export default {
   match, 
   matches, 
+  activeMatch,
   activeMatches,
+  newScore,
+  matchRequest,
+  newMatch,
+  sameTeam,
 }
