@@ -2,6 +2,7 @@ import TeamService from './TeamService';
 import { leaderBoard } from '../Interfaces/leaderboard';
 import { ServiceResponse } from '../Interfaces/ServiceResponse';
 import * as teamsFunc from '../utils/teamScore';
+import sortLeaderboard from '../utils/sortLeaderboard';
 
 export default class LeaderboardService {
   private teamsFunc = teamsFunc;
@@ -29,7 +30,7 @@ export default class LeaderboardService {
       efficiency: await teamsFunc.totalEfficiency(team.id),
     }));
 
-    const leaderBoardHome = await Promise.all(leaderBoardPromises);
+    const leaderBoardHome = (await Promise.all(leaderBoardPromises)).sort(sortLeaderboard);
 
     return { status: 'SUCCESSFUL', data: leaderBoardHome };
   }

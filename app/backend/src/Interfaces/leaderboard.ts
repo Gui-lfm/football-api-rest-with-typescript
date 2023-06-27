@@ -1,9 +1,9 @@
 export interface leaderBoard {
   name: string;
-  totalGames: number | null;
-  totalVictories: number | null;
-  totalDraws: number | null;
-  totalLosses: number | null;
+  totalGames: number;
+  totalVictories: number;
+  totalDraws: number;
+  totalLosses: number;
   totalPoints: number;
   goalsFavor: number,
   goalsOwn: number,
