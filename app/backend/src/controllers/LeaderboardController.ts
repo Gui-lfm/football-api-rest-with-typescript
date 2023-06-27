@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import LeaderboardService from '../services/LeaderboardService';
-// import mapStatusHTTP from '../utils/mapStatusHTTP';
+import mapStatusHTTP from '../utils/mapStatusHTTP';
 
 export default class LeaderboardController {
   constructor(
@@ -8,12 +8,32 @@ export default class LeaderboardController {
   ) {}
 
   public async getTotalLeaderBoard(req: Request, res: Response) {
-    const response = await this.leaderboardService.getTotalLeaderBoard();
+    const serviceResponse = await this.leaderboardService.getTotalLeaderBoard();
 
-    if (!response) {
-      return res.status(404).json({ message: 'error' });
+    if (serviceResponse.status !== 'SUCCESSFUL') {
+      return res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
     }
 
-    res.status(200).json(response.data);
+    res.status(200).json(serviceResponse.data);
+  }
+
+  public async getHomeLeaderBoard(req: Request, res: Response) {
+    const serviceResponse = await this.leaderboardService.getHomeLeaderboard();
+
+    if (serviceResponse.status !== 'SUCCESSFUL') {
+      return res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
+    }
+
+    res.status(200).json(serviceResponse.data);
+  }
+
+  public async getAwayLeaderBoard(req: Request, res: Response) {
+    const serviceResponse = await this.leaderboardService.getAwayLeaderboard();
+
+    if (serviceResponse.status !== 'SUCCESSFUL') {
+      return res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
+    }
+
+    res.status(200).json(serviceResponse.data);
   }
 }
