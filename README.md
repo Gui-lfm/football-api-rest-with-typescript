@@ -12,42 +12,75 @@
 - [Docker](https://www.docker.com/)
 - [node.js](https://nodejs.org/en)
 - [express](https://expressjs.com/pt-br/)
+- [bcrypt](https://www.npmjs.com/package/bcrypt)
+- [JWT](https://jwt.io/)
 
 ## ↗️ Endpoints:
 ### Teams
 ```
 /teams
 ```
+- Utiliza o método do tipo GET.
+- Retorna um json com todos os times armazenados no banco de dados. cada time possui um id e um teamName.
+
 ```
 /teams/:id
 ```
+- Utiliza o método do tipo GET.
+- Retorna os dados do time especificado pelo id presente no parâmetro da URL.
 
 ### Users e Login (credenciais de acesso)
 ```
 /login
 ```
+- Utiliza o método do tipo POST.
+- o enpoint não permite o acesso caso o email ou a senha não sejam informados, retornando um erro de código 400.
+- Caso o login seja realizado com sucesso, é retornado um token que será requisitado ao tentar adicionar ou alterar partidas.
 
 ### Matches
 ```
 /matches
 ```
+- Utilizado o método do tipo GET:
+  - Retorna um json com todas as partidas presentes no banco de dados
+  - É possível filtrar as partidas, mostrando somente as em andamento ou finalizadas utilizado query strings: ex: ```matches?inProgress=true```
+- Utilizando o método do tipo POST:
+  - Deve inserir uma partida no banco de dados
+  - É necessário um token válido para que a inserção ocorra, caso contrário, a requisição retornará um erro de código 401.
+  - Não é possível inserir uma partida com dois times iguais ou com um time que não exista na tabela de times (/teams)
+  - Em caso de sucesso, retorna a partida inserida no banco de dados.
 ```
 /matches/:id
 ```
+- Utiliza o método do tipo PATCH.
+- Atualiza uma partida em andamento, sendo necessário um token válido para que a operação ocorra.
+- Caso o token não esteja presente ou não seja válido, retorna um erro de código 401
 ```
 /matches/:id/finish
 ```
+- Utiliza o método do tipo PATCH.
+- Finaliza uma partida em andamento, sendo necessário um token válido para que a operação ocorra.
+- Caso o token não esteja presente ou não seja válido, retorna um erro de código 401.
 
 ### Leaderboards
 ```
 /leaderboard/home
 ```
+- Utilizado o método do tipo GET.
+- Retorna um json com as informações do desempenho dos times da casa
+- Partidas em andamento (não foram finalizadas) não são consideradas.
 ```
 /leaderboard/away
 ```
+- Utilizado o método do tipo GET.
+- Retorna um json com as informações do desempenho dos times visitantes.
+- Partidas em andamento (não foram finalizadas) não são consideradas.
 ```
 /leaderboard
 ```
+- Utilizado o método do tipo GET.
+- Retorna um json com as informações do desempenho geral dos times.
+- Partidas em andamento (não foram finalizadas) não são consideradas.
 
 ## 👾Autor
 
